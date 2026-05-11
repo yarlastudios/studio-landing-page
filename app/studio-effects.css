@@ -1,0 +1,257 @@
+@keyframes studio-rise {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes studio-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes studio-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes studio-cycle {
+  0%,
+  25% {
+    transform: translateY(0);
+  }
+  25.01%,
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes studio-cycle2 {
+  0%,
+  25% {
+    transform: translateY(0);
+  }
+  25.01%,
+  50% {
+    transform: translateY(-100%);
+  }
+  50.01%,
+  100% {
+    transform: translateY(-200%);
+  }
+}
+
+@keyframes studio-cycle3 {
+  0%,
+  50% {
+    transform: translateY(0);
+  }
+  50.01%,
+  75% {
+    transform: translateY(-100%);
+  }
+  75.01%,
+  100% {
+    transform: translateY(-200%);
+  }
+}
+
+@keyframes studio-cycle4 {
+  0%,
+  75% {
+    transform: translateY(0);
+  }
+  75.01%,
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* ---- Custom cursor ---- */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.25s var(--ease),
+    height 0.25s var(--ease),
+    opacity 0.2s;
+}
+
+.cursor-ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.35s var(--ease),
+    height 0.35s var(--ease),
+    border-color 0.25s,
+    background 0.25s;
+}
+
+.cursor-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(14px, 14px);
+  font: 500 11px/1 var(--f-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.cursor.is-link .cursor-ring {
+  width: 56px;
+  height: 56px;
+}
+
+.cursor.is-magnet .cursor-ring {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cursor.is-view .cursor-ring {
+  width: 86px;
+  height: 86px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cursor.is-view .cursor-label {
+  opacity: 1;
+}
+
+.cursor.is-card .cursor-ring {
+  width: 64px;
+  height: 64px;
+}
+
+.cursor.is-hidden {
+  opacity: 0;
+}
+
+@media (max-width: 900px) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* ---- Hero title stagger + badge + scroll shimmer ---- */
+
+.hero-title-studio .studio-reveal > span {
+  display: block;
+  transform: translateY(110%);
+}
+
+.hero-title-studio .hero-title-line:nth-child(1) .studio-reveal > span {
+  animation: studio-rise 1.2s var(--ease-out) forwards;
+  animation-delay: 1.1s;
+}
+
+.hero-title-studio .hero-title-line:nth-child(2) .studio-reveal > span {
+  animation: studio-rise 1.2s var(--ease-out) forwards;
+  animation-delay: 1.25s;
+}
+
+.hero-title-studio .hero-title-line:nth-child(3) .studio-reveal > span {
+  animation: studio-rise 1.2s var(--ease-out) forwards;
+  animation-delay: 1.4s;
+}
+
+.studio-badge-cycle b {
+  display: block;
+  font-weight: inherit;
+  animation: studio-cycle 7s steps(1) infinite;
+}
+
+.studio-badge-cycle b:nth-child(2) {
+  animation-name: studio-cycle2;
+}
+
+.studio-badge-cycle b:nth-child(3) {
+  animation-name: studio-cycle3;
+}
+
+.studio-badge-cycle b:nth-child(4) {
+  animation-name: studio-cycle4;
+}
+
+.hero-blurb-studio {
+  opacity: 0;
+  animation: studio-fade 1s 1.7s var(--ease) forwards;
+}
+
+.hero-actions-studio {
+  opacity: 0;
+  animation: studio-fade 1s 1.9s var(--ease) forwards;
+}
+
+.hero-scroll-studio {
+  opacity: 0;
+  animation: studio-fade 1s 2.1s var(--ease) forwards;
+}
+
+.studio-scroll-line-fill {
+  animation: studio-slide 2.4s var(--ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring {
+    transition-duration: 0.01ms;
+  }
+
+  .hero-title-studio .hero-title-line:nth-child(n) .studio-reveal > span {
+    animation: none !important;
+    transform: translateY(0) !important;
+  }
+
+  .studio-badge-cycle b {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero-blurb-studio,
+  .hero-actions-studio,
+  .hero-scroll-studio {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .studio-scroll-line-fill {
+    animation: none !important;
+    transform: none !important;
+  }
+}
