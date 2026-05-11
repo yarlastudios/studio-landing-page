@@ -4,7 +4,7 @@ export function Hero() {
       <div className="flex items-center justify-between gap-4 font-[500_11px/1_var(--f-mono)] uppercase tracking-[0.06em] text-[var(--muted)]">
         <div className="inline-flex items-center gap-2">
           <span className="size-1.5 shrink-0 rounded-full bg-[var(--blue)]" />
-          <span>[ 01 — Index ]</span>
+          <span>[ 01 - Index ]</span>
         </div>
       </div>
 
@@ -81,16 +81,6 @@ export function Hero() {
             </a>
           </div>
         </div>
-      </div>
-
-      <div className="hero-scroll-studio flex items-center gap-3 font-[500_11px/1_var(--f-mono)] uppercase tracking-[0.06em] text-[var(--muted)]">
-        <span className="relative inline-block h-px w-14 overflow-hidden bg-[var(--line)]">
-          <span
-            className="studio-scroll-line-fill absolute inset-0 translate-x-[-100%] bg-[var(--ink)]"
-            aria-hidden
-          />
-        </span>
-        <span className="select-none">Scroll</span>
       </div>
     </section>
   );
