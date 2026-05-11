@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 
 const NAV_ITEMS = [
@@ -20,8 +21,14 @@ const MOBILE_DRAWER_ID = "primary-nav-drawer";
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [portalMounted, setPortalMounted] = useState(false);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only portal root
+    setPortalMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -48,28 +55,27 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [mobileOpen, closeMobile]);
 
-  return (
-    <header
-      id="nav"
-      className={cn(
-        "fixed inset-x-0 top-0 z-[100] px-[var(--pad-x)] pb-[18px] pt-[18px] transition-[padding,background-color,backdrop-filter,-webkit-backdrop-filter,border-color] duration-[350ms] ease-[var(--ease)]",
-        scrolled &&
-          "border-b border-[var(--line)] bg-[rgba(246,245,241,0.78)] pb-2.5 pt-2.5 backdrop-blur-[14px] backdrop-saturate-[110%]",
-      )}
-    >
+  const mobileMenuPortal =
+    portalMounted &&
+    createPortal(
       <div
         aria-hidden={!mobileOpen}
         className={cn(
-          "fixed inset-0 z-0 hidden max-[1100px]:block",
+          "fixed inset-0 z-[90] hidden max-[1100px]:block",
           mobileOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0",
+            ? "pointer-events-auto"
+            : "pointer-events-none",
           "ease-[var(--ease)] motion-reduce:transition-none motion-reduce:duration-[1ms] transition-opacity duration-[320ms]",
+          mobileOpen ? "opacity-100" : "opacity-0",
         )}
       >
         <button
           aria-label="Close menu"
-          className="absolute inset-0 cursor-pointer bg-[rgba(10,10,18,0.42)] backdrop-blur-md [-webkit-backdrop-filter:blur(12px)]"
+          className={cn(
+            "absolute inset-0 cursor-pointer bg-[rgba(10,10,18,0.42)] backdrop-blur-md [-webkit-backdrop-filter:blur(12px)] motion-reduce:transition-none motion-reduce:duration-[1ms]",
+            mobileOpen ? "opacity-100" : "opacity-0",
+            "transition-opacity duration-[320ms]",
+          )}
           tabIndex={mobileOpen ? 0 : -1}
           type="button"
           onClick={closeMobile}
@@ -78,7 +84,7 @@ export function Nav() {
           aria-labelledby="nav-mobile-heading"
           aria-modal="true"
           className={cn(
-            "absolute bottom-0 left-[max(16px,env(safe-area-inset-left))] right-[max(16px,env(safe-area-inset-right))] max-h-[min(560px,88dvh)] overflow-y-auto overscroll-contain rounded-t-[20px] border border-b-0 border-[var(--line)] bg-[var(--paper)] opacity-[0.98] shadow-[0_-32px_80px_rgba(10,10,18,0.12),0_-1px_0_rgba(255,255,255,0.6)] [-webkit-overflow-scrolling:touch] motion-reduce:duration-[1ms] motion-reduce:transition-none ease-[var(--ease-out)] transition-[transform,opacity] duration-[420ms]",
+            "fixed bottom-0 left-[max(16px,env(safe-area-inset-left))] right-[max(16px,env(safe-area-inset-right))] z-[91] max-h-[min(560px,88dvh)] overflow-y-auto overscroll-contain rounded-t-[20px] border border-b-0 border-[var(--line)] bg-[var(--paper)] opacity-[0.98] shadow-[0_-32px_80px_rgba(10,10,18,0.12),0_-1px_0_rgba(255,255,255,0.6)] [-webkit-overflow-scrolling:touch] motion-reduce:duration-[1ms] motion-reduce:transition-none ease-[var(--ease-out)] transition-[transform,opacity] duration-[420ms] will-change-transform",
             mobileOpen
               ? "translate-y-0 opacity-100"
               : "translate-y-[106%] opacity-[0.98]",
@@ -135,8 +141,20 @@ export function Nav() {
             </a>
           </nav>
         </div>
-      </div>
+      </div>,
+      document.body,
+    );
 
+  return (
+    <>
+    <header
+      id="nav"
+      className={cn(
+        "fixed inset-x-0 top-0 z-[100] px-[var(--pad-x)] pb-[18px] pt-[18px] transition-[padding,background-color,backdrop-filter,-webkit-backdrop-filter,border-color] duration-[350ms] ease-[var(--ease)]",
+        scrolled &&
+          "border-b border-[var(--line)] bg-[rgba(246,245,241,0.78)] pb-2.5 pt-2.5 backdrop-blur-[14px] backdrop-saturate-[110%]",
+      )}
+    >
       <div className="relative z-[2] grid grid-cols-[1fr_auto_1fr] items-center gap-6 max-[1100px]:grid-cols-[1fr_auto] max-[1100px]:gap-4">
         <Link
           aria-label="Yarla Studios home"
@@ -237,5 +255,7 @@ export function Nav() {
         </div>
       </div>
     </header>
+    {mobileMenuPortal ? mobileMenuPortal : null}
+    </>
   );
 }
