@@ -1,5 +1,6 @@
 "use client";
 
+import type { FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -13,61 +14,71 @@ const CHIP_LABELS = [
   "Retainer",
 ] as const;
 
+type SendUi = "idle" | "sending" | "success" | "error";
+
 export function CTA() {
   const [chipOn, setChipOn] = useState<Record<string, boolean>>({});
-  const formRef = useRef<HTMLFormElement>(null);
+  const [sendUi, setSendUi] = useState<SendUi>("idle");
+  const chipOnRef = useRef(chipOn);
+  const resetTimerRef = useRef<number | undefined>(undefined);
+  const submitLockRef = useRef(false);
+
+  useEffect(() => {
+    chipOnRef.current = chipOn;
+  }, [chipOn]);
+
+  useEffect(() => () => window.clearTimeout(resetTimerRef.current), []);
 
   const toggleChip = useCallback((label: string) => {
     setChipOn((prev) => ({ ...prev, [label]: !prev[label] }));
   }, []);
 
-  useEffect(() => {
-    const form = formRef.current;
-    const timers: { thanks?: number; reset?: number } = {};
-    const clearTimers = () => {
-      if (timers.thanks !== undefined) window.clearTimeout(timers.thanks);
-      if (timers.reset !== undefined) window.clearTimeout(timers.reset);
-      delete timers.thanks;
-      delete timers.reset;
-    };
+  const onSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitLockRef.current) return;
+    submitLockRef.current = true;
 
-    const onSubmit = (e: Event) => {
-      e.preventDefault();
-      if (!form) return;
+    const form = e.currentTarget;
+    setSendUi("sending");
 
-      clearTimers();
+    const formData = new FormData(form);
+    const types = CHIP_LABELS.filter((c) => chipOnRef.current[c]).join(", ");
 
-      const labelNodes = form.querySelectorAll<HTMLSpanElement>(
-        'button[type="submit"] .t',
-      );
-      const original = [...labelNodes].map((t) => t.textContent ?? "");
-      labelNodes.forEach((t) => {
-        t.textContent = "Sending...";
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          brief: formData.get("brief"),
+          type: types,
+        }),
       });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) throw new Error(data.error ?? "Request failed");
+      setSendUi("success");
+    } catch {
+      setSendUi("error");
+    }
 
-      timers.thanks = window.setTimeout(() => {
-        labelNodes.forEach((t) => {
-          t.textContent = "Thanks — mail us below";
-        });
-      }, 650);
-
-      timers.reset = window.setTimeout(() => {
-        labelNodes.forEach((t, i) => {
-          t.textContent = original[i] ?? "Send brief";
-        });
-        form.reset();
-        setChipOn({});
-        clearTimers();
-      }, 2600);
-    };
-
-    form?.addEventListener("submit", onSubmit);
-
-    return () => {
-      clearTimers();
-      form?.removeEventListener("submit", onSubmit);
-    };
+    window.clearTimeout(resetTimerRef.current);
+    resetTimerRef.current = window.setTimeout(() => {
+      form.reset();
+      setChipOn({});
+      setSendUi("idle");
+      submitLockRef.current = false;
+    }, 2400);
   }, []);
+
+  const statusLabel =
+    sendUi === "sending"
+      ? "Sending…"
+      : sendUi === "success"
+        ? "Check your inbox"
+        : sendUi === "error"
+          ? "Try email below"
+          : null;
 
   return (
     <>
@@ -96,9 +107,9 @@ export function CTA() {
           </p>
 
           <form
-            ref={formRef}
             id="ctaForm"
             className="grid grid-cols-2 gap-6 max-[700px]:grid-cols-1"
+            onSubmit={onSubmit}
           >
             <label className="flex flex-col gap-2.5 [font-family:var(--f-display)]">
               <span className="text-[11px] font-medium uppercase tracking-[0.06em] text-white/55 [font-family:var(--f-mono)]">
@@ -164,21 +175,38 @@ export function CTA() {
               </div>
               <button
                 type="submit"
-                className="group relative inline-flex shrink-0 items-center gap-3 overflow-hidden rounded-full border-none bg-[var(--ink)] px-7 py-5 text-[15px] font-medium tracking-tight text-white transition-[color] duration-[350ms] ease-[var(--ease)] [font-family:var(--f-display)] max-[700px]:w-full max-[700px]:justify-center"
+                disabled={sendUi === "sending"}
+                className={cn(
+                  "group relative inline-flex min-h-[52px] shrink-0 items-center justify-center gap-3 overflow-hidden rounded-full border border-white/15 bg-[var(--ink)] px-7 py-5 text-[15px] font-medium tracking-tight text-white transition-[color,opacity] duration-[350ms] ease-[var(--ease)] [font-family:var(--f-display)] max-[700px]:w-full",
+                  sendUi === "sending" && "cursor-wait opacity-90",
+                )}
                 data-cursor="magnet"
               >
-                <span className="absolute inset-0 z-0 translate-y-[101%] rounded-full bg-[var(--blue)] transition-transform duration-[550ms] ease-[var(--ease-out)] group-hover:translate-y-0" />
-                <span className="relative z-10 inline-block h-[15px] overflow-hidden">
-                  <span className="t block transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-full">
-                    Send brief
+                <span
+                  className={cn(
+                    "absolute inset-0 z-0 translate-y-[101%] rounded-full bg-[var(--blue)] transition-transform duration-[550ms] ease-[var(--ease-out)] group-disabled:translate-y-[101%]",
+                    sendUi === "idle" ? "group-hover:translate-y-0" : "",
+                  )}
+                />
+                {statusLabel ? (
+                  <span className="relative z-10 min-w-[10.5rem] text-center leading-none max-[700px]:min-w-0">
+                    {statusLabel}
                   </span>
-                  <span className="t block transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-full">
-                    Send brief
-                  </span>
-                </span>
-                <span className="relative z-10 inline-block transition-transform duration-450 ease-[var(--ease)] group-hover:translate-x-1">
-                  →
-                </span>
+                ) : (
+                  <>
+                    <span className="relative z-10 inline-block h-[18px] min-w-[5.5rem] overflow-hidden leading-[18px]">
+                      <span className="block transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-full group-disabled:translate-y-0">
+                        Send brief
+                      </span>
+                      <span className="block transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-full group-disabled:translate-y-0">
+                        Send brief
+                      </span>
+                    </span>
+                    <span className="relative z-10 shrink-0 transition-transform duration-450 ease-[var(--ease)] group-hover:translate-x-1 group-disabled:translate-x-0">
+                      →
+                    </span>
+                  </>
+                )}
               </button>
             </div>
           </form>
