@@ -30,6 +30,20 @@ export const metadata: Metadata = {
   title: "Yarla Studios - Digital craft for ambitious brands",
   description:
     "Independent design and engineering practice building websites, products, and brand systems.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Yarla Studios",
+    title: "Yarla Studios - Digital craft for ambitious brands",
+    description:
+      "Independent design and engineering practice building websites, products, and brand systems.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yarla Studios - Digital craft for ambitious brands",
+    description:
+      "Independent design and engineering practice building websites, products, and brand systems.",
+  },
 };
 
 export default function RootLayout({
