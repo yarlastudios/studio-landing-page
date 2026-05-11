@@ -47,7 +47,7 @@ export function Hero() {
           </p>
           <div className="hero-actions-studio flex flex-wrap items-center justify-start gap-3 min-[801px]:justify-end">
             <a
-              href="#work"
+              href="/work"
               data-cursor="magnet"
               className="group/btn relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[var(--ink)] px-6 py-4 text-[14px] font-medium tracking-[-0.005em] text-white transition-[color] duration-300 ease-[var(--ease)]"
             >

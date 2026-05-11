@@ -52,7 +52,7 @@ const services: {
   {
     num: "03",
     title: "Engineering",
-    desc: "Webflow, headless, Next.js, custom CMS — pick a stack, we&apos;ll ship it without compromise.",
+    desc: "Webflow, headless, Next.js, custom CMS — pick a stack, we'll ship it without compromise.",
     items: [
       "Webflow & CMS",
       "Next.js / Astro",
