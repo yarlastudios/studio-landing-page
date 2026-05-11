@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 const NAV_ITEMS = [
   { href: "/work", label: "Work" },
   { href: "/#services", label: "Services" },
-  { href: "/process", label: "Process" },
+  { href: "/#process", label: "Process" },
   { href: "/studio", label: "Studio" },
   { href: "/journal", label: "Journal" },
 ] as const;

@@ -4,6 +4,8 @@ import { Intro } from "@/components/home/Intro";
 import { Marquee } from "@/components/home/Marquee";
 import { Work } from "@/components/home/Work";
 import { Services } from "@/components/home/Services";
+import { Process } from "@/components/home/Process";
+import { Stats } from "@/components/home/Stats";
 
 export default function HomePage() {
   return (
@@ -14,6 +16,8 @@ export default function HomePage() {
       <Intro />
       <Work />
       <Services />
+      <Process />
+      <Stats />
     </main>
   );
 }
