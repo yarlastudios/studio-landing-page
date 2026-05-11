@@ -237,6 +237,34 @@
   animation: studio-marq 38s linear infinite;
 }
 
+.work-list .work-item-link {
+  text-decoration: none;
+}
+
+.peek-tile {
+  background-image: var(--bg);
+}
+
+.peek-tile.active {
+  opacity: 1;
+}
+
+.work-list-peek {
+  left: -999px;
+  top: -999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.work-list-peek.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
@@ -283,6 +311,10 @@
   .marquee-row-studio {
     animation: none !important;
     transform: none !important;
+  }
+
+  .work-list-peek {
+    transition: none !important;
   }
 
   .reveal-on-scroll {
