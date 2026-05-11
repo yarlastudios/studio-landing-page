@@ -23,7 +23,9 @@ export function useCountUp() {
       { threshold: 0.5 },
     );
 
-    document.querySelectorAll(".counter").forEach((el) => counterIO.observe(el));
+    document
+      .querySelectorAll(".counter")
+      .forEach((el) => counterIO.observe(el));
 
     return () => counterIO.disconnect();
   }, []);

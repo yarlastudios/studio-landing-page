@@ -1,6 +1,21 @@
 @import "tailwindcss";
 @import "./studio-effects.css";
 
+@keyframes svc-wave-bar {
+  from {
+    height: 20%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes step-num-blink {
+  to {
+    opacity: 0.6;
+  }
+}
+
 :root {
   --blue: #1f2bff;
   --blue-deep: #0a14cc;

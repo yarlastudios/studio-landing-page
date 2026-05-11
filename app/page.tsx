@@ -8,6 +8,7 @@ import { Process } from "@/components/home/Process";
 import { Stats } from "@/components/home/Stats";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Journal } from "@/components/home/Journal";
+import { CTA } from "@/components/home/CTA";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Stats />
       <Testimonials />
       <Journal />
+      <CTA />
     </main>
   );
 }

@@ -62,9 +62,7 @@ export function Nav() {
         aria-hidden={!mobileOpen}
         className={cn(
           "fixed inset-0 z-[90] hidden max-[1100px]:block",
-          mobileOpen
-            ? "pointer-events-auto"
-            : "pointer-events-none",
+          mobileOpen ? "pointer-events-auto" : "pointer-events-none",
           "ease-[var(--ease)] motion-reduce:transition-none motion-reduce:duration-[1ms] transition-opacity duration-[320ms]",
           mobileOpen ? "opacity-100" : "opacity-0",
         )}
@@ -147,115 +145,115 @@ export function Nav() {
 
   return (
     <>
-    <header
-      id="nav"
-      className={cn(
-        "fixed inset-x-0 top-0 z-[100] px-[var(--pad-x)] pb-[18px] pt-[18px] transition-[padding,background-color,backdrop-filter,-webkit-backdrop-filter,border-color] duration-[350ms] ease-[var(--ease)]",
-        scrolled &&
-          "border-b border-[var(--line)] bg-[rgba(246,245,241,0.78)] pb-2.5 pt-2.5 backdrop-blur-[14px] backdrop-saturate-[110%]",
-      )}
-    >
-      <div className="relative z-[2] grid grid-cols-[1fr_auto_1fr] items-center gap-6 max-[1100px]:grid-cols-[1fr_auto] max-[1100px]:gap-4">
-        <Link
-          aria-label="Yarla Studios home"
-          className={cn(
-            "group/logo flex shrink-0 items-center gap-2.5 text-[var(--blue)] outline-none hover:opacity-90",
-          )}
-          data-cursor="logo"
-          href="/"
-          onClick={closeMobile}
-        >
-          <span className="logo-mark inline-flex">
-            <Image
-              priority
-              alt=""
-              aria-hidden
-              className="block duration-[600ms] ease-[var(--ease)] transition-transform group-hover/logo:rotate-180"
-              height={28}
-              src="/assets/home/yarla-logo-mark.svg"
-              width={28}
-            />
-          </span>
-          <span className="flex flex-col leading-[0.9]">
-            <span className="text-[16px] font-extrabold leading-[0.9] tracking-[-0.02em]">
-              Yarla
-            </span>
-            <span className="text-[16px] font-extrabold leading-[0.9] tracking-[-0.02em]">
-              Studios
-            </span>
-          </span>
-        </Link>
-
-        <nav
-          aria-label="Primary"
-          className="hidden min-[1101px]:flex justify-center gap-1.5"
-        >
-          {NAV_ITEMS.map(({ href, label }) => (
-            <Link
-              key={href}
-              className="group/nav-pill relative overflow-hidden rounded-full px-[14px] py-2.5 text-[14px] font-medium tracking-[-0.01em] text-[var(--ink)] outline-none"
-              data-cursor="link"
-              href={href}
-            >
-              <span
-                aria-hidden
-                className="absolute inset-0 z-0 translate-y-[101%] rounded-full bg-[var(--ink)] duration-[450ms] ease-[var(--ease)] transition-transform group-focus-visible/nav-pill:translate-y-0 group-hover/nav-pill:translate-y-0"
-              />
-              <span className="relative z-[1] duration-300 ease-[var(--ease)] transition-colors group-focus-visible/nav-pill:text-white group-hover/nav-pill:text-white">
-                {label}
-              </span>
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center justify-end gap-3 max-[1100px]:gap-2.5 max-[1100px]:[&>*]:items-center min-[1101px]:gap-3.5">
-          <button
-            aria-controls={MOBILE_DRAWER_ID}
-            aria-expanded={mobileOpen}
+      <header
+        id="nav"
+        className={cn(
+          "fixed inset-x-0 top-0 z-[100] px-[var(--pad-x)] pb-[18px] pt-[18px] transition-[padding,background-color,backdrop-filter,-webkit-backdrop-filter,border-color] duration-[350ms] ease-[var(--ease)]",
+          scrolled &&
+            "border-b border-[var(--line)] bg-[rgba(246,245,241,0.78)] pb-2.5 pt-2.5 backdrop-blur-[14px] backdrop-saturate-[110%]",
+        )}
+      >
+        <div className="relative z-[2] grid grid-cols-[1fr_auto_1fr] items-center gap-6 max-[1100px]:grid-cols-[1fr_auto] max-[1100px]:gap-4">
+          <Link
+            aria-label="Yarla Studios home"
             className={cn(
-              "hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[var(--line)] bg-white/55 px-4 py-0 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ink)] outline-none duration-[250ms] ease-[var(--ease)] transition-[border-color,background-color,color] hover:border-[var(--ink)] max-[1100px]:inline-flex",
-              scrolled &&
-                "max-[1100px]:border-[rgba(217,214,204,0.85)] max-[1100px]:bg-white/[0.7]",
+              "group/logo flex shrink-0 items-center gap-2.5 text-[var(--blue)] outline-none hover:opacity-90",
             )}
-            type="button"
-            onClick={() => setMobileOpen((o) => !o)}
-          >
-            {mobileOpen ? "Close" : "Menu"}
-          </button>
-
-          <a
-            aria-label="Schedule kickoff via Google Calendar (opens new tab)"
-            className={cn(
-              "group/nav-cta relative box-border inline-flex min-h-[44px] overflow-hidden rounded-full bg-[var(--ink)] px-4 py-3 leading-none outline-none duration-300 ease-[var(--ease)] transition-colors hover:bg-[var(--blue)] max-[380px]:hidden max-[1100px]:justify-center max-[1100px]:gap-2",
-              "items-center gap-2.5 text-[13px] font-medium tracking-[-0.005em] text-white min-[1101px]:px-[18px] min-[1101px]:py-[11px]",
-            )}
-            data-cursor="magnet"
-            href={PROJECT_CAL}
+            data-cursor="logo"
+            href="/"
             onClick={closeMobile}
-            rel="noopener noreferrer"
-            target="_blank"
           >
-            <span className="relative z-[1] hidden h-[13px] min-[1101px]:inline-flex min-[1101px]:flex-col min-[1101px]:overflow-hidden">
-              <span className="flex translate-y-0 flex-col duration-[450ms] ease-[var(--ease-out)] transition-transform group-hover/nav-cta:-translate-y-1/2">
-                <span className="flex h-[13px] shrink-0 items-center">
-                  Start a project
-                </span>
-                <span className="flex h-[13px] shrink-0 items-center">
-                  Start a project
-                </span>
+            <span className="logo-mark inline-flex">
+              <Image
+                priority
+                alt=""
+                aria-hidden
+                className="block duration-[600ms] ease-[var(--ease)] transition-transform group-hover/logo:rotate-180"
+                height={28}
+                src="/assets/home/yarla-logo-mark.svg"
+                width={28}
+              />
+            </span>
+            <span className="flex flex-col leading-[0.9]">
+              <span className="text-[16px] font-extrabold leading-[0.9] tracking-[-0.02em]">
+                Yarla
+              </span>
+              <span className="text-[16px] font-extrabold leading-[0.9] tracking-[-0.02em]">
+                Studios
               </span>
             </span>
-            <span className="relative z-[1] min-[1101px]:hidden">
-              Start a project
-            </span>
-            <span className="relative z-[1] translate-x-0 duration-[400ms] ease-[var(--ease)] transition-transform group-hover/nav-cta:translate-x-[2px] group-hover/nav-cta:-translate-y-[2px]">
-              ↗
-            </span>
-          </a>
+          </Link>
+
+          <nav
+            aria-label="Primary"
+            className="hidden min-[1101px]:flex justify-center gap-1.5"
+          >
+            {NAV_ITEMS.map(({ href, label }) => (
+              <Link
+                key={href}
+                className="group/nav-pill relative overflow-hidden rounded-full px-[14px] py-2.5 text-[14px] font-medium tracking-[-0.01em] text-[var(--ink)] outline-none"
+                data-cursor="link"
+                href={href}
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-0 z-0 translate-y-[101%] rounded-full bg-[var(--ink)] duration-[450ms] ease-[var(--ease)] transition-transform group-focus-visible/nav-pill:translate-y-0 group-hover/nav-pill:translate-y-0"
+                />
+                <span className="relative z-[1] duration-300 ease-[var(--ease)] transition-colors group-focus-visible/nav-pill:text-white group-hover/nav-pill:text-white">
+                  {label}
+                </span>
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center justify-end gap-3 max-[1100px]:gap-2.5 max-[1100px]:[&>*]:items-center min-[1101px]:gap-3.5">
+            <button
+              aria-controls={MOBILE_DRAWER_ID}
+              aria-expanded={mobileOpen}
+              className={cn(
+                "hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[var(--line)] bg-white/55 px-4 py-0 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ink)] outline-none duration-[250ms] ease-[var(--ease)] transition-[border-color,background-color,color] hover:border-[var(--ink)] max-[1100px]:inline-flex",
+                scrolled &&
+                  "max-[1100px]:border-[rgba(217,214,204,0.85)] max-[1100px]:bg-white/[0.7]",
+              )}
+              type="button"
+              onClick={() => setMobileOpen((o) => !o)}
+            >
+              {mobileOpen ? "Close" : "Menu"}
+            </button>
+
+            <a
+              aria-label="Schedule kickoff via Google Calendar (opens new tab)"
+              className={cn(
+                "group/nav-cta relative box-border inline-flex min-h-[44px] overflow-hidden rounded-full bg-[var(--ink)] px-4 py-3 leading-none outline-none duration-300 ease-[var(--ease)] transition-colors hover:bg-[var(--blue)] max-[380px]:hidden max-[1100px]:justify-center max-[1100px]:gap-2",
+                "items-center gap-2.5 text-[13px] font-medium tracking-[-0.005em] text-white min-[1101px]:px-[18px] min-[1101px]:py-[11px]",
+              )}
+              data-cursor="magnet"
+              href={PROJECT_CAL}
+              onClick={closeMobile}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span className="relative z-[1] hidden h-[13px] min-[1101px]:inline-flex min-[1101px]:flex-col min-[1101px]:overflow-hidden">
+                <span className="flex translate-y-0 flex-col duration-[450ms] ease-[var(--ease-out)] transition-transform group-hover/nav-cta:-translate-y-1/2">
+                  <span className="flex h-[13px] shrink-0 items-center">
+                    Start a project
+                  </span>
+                  <span className="flex h-[13px] shrink-0 items-center">
+                    Start a project
+                  </span>
+                </span>
+              </span>
+              <span className="relative z-[1] min-[1101px]:hidden">
+                Start a project
+              </span>
+              <span className="relative z-[1] translate-x-0 duration-[400ms] ease-[var(--ease)] transition-transform group-hover/nav-cta:translate-x-[2px] group-hover/nav-cta:-translate-y-[2px]">
+                ↗
+              </span>
+            </a>
+          </div>
         </div>
-      </div>
-    </header>
-    {mobileMenuPortal ? mobileMenuPortal : null}
+      </header>
+      {mobileMenuPortal ? mobileMenuPortal : null}
     </>
   );
 }
