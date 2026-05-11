@@ -14,7 +14,9 @@ export function useScrollReveal() {
       { threshold: 0.15 },
     );
 
-    document.querySelectorAll(".reveal-on-scroll").forEach((el) => io.observe(el));
+    document
+      .querySelectorAll(".reveal-on-scroll")
+      .forEach((el) => io.observe(el));
 
     return () => io.disconnect();
   }, []);

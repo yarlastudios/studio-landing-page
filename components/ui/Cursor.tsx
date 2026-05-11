@@ -33,8 +33,11 @@ export function Cursor() {
     tickCursor();
 
     const cursorTargets = document.querySelectorAll("[data-cursor]");
-    const handles: { el: Element; onIn: EventListener; onOut: EventListener }[] =
-      [];
+    const handles: {
+      el: Element;
+      onIn: EventListener;
+      onOut: EventListener;
+    }[] = [];
 
     cursorTargets.forEach((el) => {
       const kind = el.getAttribute("data-cursor");

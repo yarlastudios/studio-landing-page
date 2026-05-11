@@ -168,7 +168,10 @@ export function Nav() {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden min-[1101px]:flex justify-center gap-1.5">
+        <nav
+          aria-label="Primary"
+          className="hidden min-[1101px]:flex justify-center gap-1.5"
+        >
           {NAV_ITEMS.map(({ href, label }) => (
             <Link
               key={href}
@@ -224,7 +227,9 @@ export function Nav() {
                 </span>
               </span>
             </span>
-            <span className="relative z-[1] min-[1101px]:hidden">Start a project</span>
+            <span className="relative z-[1] min-[1101px]:hidden">
+              Start a project
+            </span>
             <span className="relative z-[1] translate-x-0 duration-[400ms] ease-[var(--ease)] transition-transform group-hover/nav-cta:translate-x-[2px] group-hover/nav-cta:-translate-y-[2px]">
               ↗
             </span>

@@ -115,7 +115,11 @@ export function Work() {
         id="workList"
       >
         {WORK_ROWS.map((row, i) => (
-          <li className="work-item relative" data-img={String(i)} key={row.title}>
+          <li
+            className="work-item relative"
+            data-img={String(i)}
+            key={row.title}
+          >
             <Link
               className="work-item-link group/work relative grid grid-cols-[56px_1fr_auto_auto] items-center gap-7 border-b border-[var(--line)] py-8 text-[var(--ink)] transition-[padding,color] duration-500 ease-[var(--ease)] max-[800px]:flex max-[800px]:flex-col max-[800px]:items-start max-[800px]:gap-3 max-[800px]:py-6"
               data-cursor="view"
@@ -183,7 +187,10 @@ function PeekSlide({ slide }: { slide: WorkPeekSlide }) {
   const style = { "--bg": slide.bg } as CSSProperties & { "--bg"?: string };
 
   return (
-    <div className="peek-tile peek-tile-surface absolute inset-0 grid place-items-center overflow-hidden text-white opacity-0" style={style}>
+    <div
+      className="peek-tile peek-tile-surface absolute inset-0 grid place-items-center overflow-hidden text-white opacity-0"
+      style={style}
+    >
       <span
         className={`peek-meta peek-meta-abs absolute bottom-3 left-3.5 font-[500_11px/1_var(--f-mono)] uppercase tracking-[0.06em] ${slide.metaDark ? "peek-meta-dark text-[var(--ink)]" : ""}`}
       >

@@ -10,9 +10,7 @@ export function useWorkPeek() {
     const peekUi = peekNode;
 
     const peekTiles = peekUi.querySelectorAll(".peek-tile");
-    const workItems = document.querySelectorAll(
-      ".work-item:not(.work-peek)",
-    );
+    const workItems = document.querySelectorAll(".work-item:not(.work-peek)");
 
     let peekX = 0;
     let peekY = 0;

@@ -41,9 +41,9 @@ export function Hero() {
 
         <div className="relative z-[1] mt-[60px] grid grid-cols-1 gap-10 min-[801px]:grid-cols-[1.2fr_1fr] min-[801px]:items-end">
           <p className="hero-blurb-studio m-0 max-w-[44ch] text-[18px] font-normal leading-[1.45] text-[var(--ink-2)]">
-            Yarla Studios is an independent design and engineering practice building
-            websites, products, and brand systems for ambitious teams across fintech,
-            climate, and consumer.
+            Yarla Studios is an independent design and engineering practice
+            building websites, products, and brand systems for ambitious teams
+            across fintech, climate, and consumer.
           </p>
           <div className="hero-actions-studio flex flex-wrap items-center justify-start gap-3 min-[801px]:justify-end">
             <a
