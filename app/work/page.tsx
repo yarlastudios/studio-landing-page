@@ -1,6 +1,7 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Work } from "@/components/home/Work";
 import { CTA } from "@/components/home/CTA";
+import { Footer } from "@/components/footer/Footer";
 
 export default function WorkPage() {
   return (
@@ -8,6 +9,7 @@ export default function WorkPage() {
       <ScrollReveal />
       <Work />
       <CTA />
+      <Footer />
     </main>
   );
 }

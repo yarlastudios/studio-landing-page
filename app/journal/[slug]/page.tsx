@@ -10,6 +10,7 @@ import {
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTA } from "@/components/home/CTA";
 import { ShareButtons } from "@/components/journal/ShareButtons";
+import { Footer } from "@/components/footer/Footer";
 
 /* ── Content renderer ── */
 function ArticleContent({ sections }: { sections: Section[] }) {
@@ -232,6 +233,7 @@ export default async function ArticlePage({
       </article>
 
       <CTA />
+      <Footer />
     </main>
   );
 }

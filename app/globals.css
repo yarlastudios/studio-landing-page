@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./studio-effects.css";
+@import "./footer-effects.css";
 
 @keyframes svc-wave-bar {
   from {

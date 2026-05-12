@@ -3,6 +3,7 @@ import { Intro } from "@/components/home/Intro";
 import { Stats } from "@/components/home/Stats";
 import { Testimonials } from "@/components/home/Testimonials";
 import { CTA } from "@/components/home/CTA";
+import { Footer } from "@/components/footer/Footer";
 
 export default function StudioPage() {
   return (
@@ -12,6 +13,7 @@ export default function StudioPage() {
       <Stats />
       <Testimonials />
       <CTA />
+      <Footer />
     </main>
   );
 }

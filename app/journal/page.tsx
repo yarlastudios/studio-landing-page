@@ -1,6 +1,7 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Journal } from "@/components/home/Journal";
 import { CTA } from "@/components/home/CTA";
+import { Footer } from "@/components/footer/Footer";
 
 export default function JournalPage() {
   return (
@@ -8,6 +9,7 @@ export default function JournalPage() {
       <ScrollReveal />
       <Journal />
       <CTA />
+      <Footer />
     </main>
   );
 }

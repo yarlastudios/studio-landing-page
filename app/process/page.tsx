@@ -1,6 +1,7 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Process } from "@/components/home/Process";
 import { CTA } from "@/components/home/CTA";
+import { Footer } from "@/components/footer/Footer";
 
 export default function ProcessPage() {
   return (
@@ -8,6 +9,7 @@ export default function ProcessPage() {
       <ScrollReveal />
       <Process />
       <CTA />
+      <Footer />
     </main>
   );
 }

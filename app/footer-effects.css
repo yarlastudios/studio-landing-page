@@ -1,0 +1,68 @@
+/* Ambient gradient drift */
+@keyframes footer-ambient-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.footer-ambient-bg {
+  background: linear-gradient(-45deg, var(--ink), #12121a, #0a0a12, #181824);
+  background-size: 400% 400%;
+  animation: footer-ambient-drift 20s ease infinite;
+}
+
+/* Link underline slide */
+.footer-link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.footer-link-underline::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -2px 0;
+  height: 1px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.footer-link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Back-to-top ring animation */
+.footer-progress-ring {
+  transition: stroke-dashoffset 0.1s linear;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.footer-ambient-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  /* Use parallax variables */
+  transform: translate(var(--parallax-x, 0px), var(--parallax-y, 0px));
+  transition: opacity 0.5s var(--ease);
+}
+
+@media (max-width: 900px) {
+  .footer-ambient-canvas {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-ambient-bg {
+    animation: none;
+  }
+  .footer-link-underline::after {
+    transition: none;
+  }
+  .footer-progress-ring {
+    transition: none;
+  }
+}
