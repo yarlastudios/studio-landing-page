@@ -102,4 +102,22 @@
     font-style: italic;
     font-weight: 400;
   }
+
+}
+
+/* Accessibility Overrides */
+body.acc-large {
+  zoom: 1.2;
+}
+body.acc-xlarge {
+  zoom: 1.4;
+}
+body.acc-high-contrast {
+  --paper: #FFFFFF;
+  --paper-2: #F0F0F0;
+  --ink: #000000;
+  --ink-2: #111111;
+  --muted: #222222;
+  --blue: #0000FF;
+  --line: #000000;
 }
