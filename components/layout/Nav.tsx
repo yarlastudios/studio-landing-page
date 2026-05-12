@@ -163,25 +163,14 @@ export function Nav() {
             href="/"
             onClick={closeMobile}
           >
-            <span className="logo-mark inline-flex">
-              <Image
-                priority
-                alt=""
-                aria-hidden
-                className="block duration-[600ms] ease-[var(--ease)] transition-transform group-hover/logo:rotate-180"
-                height={28}
-                src="/assets/home/yarla-logo-mark.svg"
-                width={28}
-              />
-            </span>
-            <span className="flex flex-col leading-[0.9]">
-              <span className="text-[16px] font-extrabold leading-[0.9] tracking-[-0.02em]">
-                Yarla
-              </span>
-              <span className="text-[16px] font-extrabold leading-[0.9] tracking-[-0.02em]">
-                Studios
-              </span>
-            </span>
+            <Image
+              priority
+              alt="Yarla Studios Logo"
+              className="block"
+              height={48}
+              src="/assets/home/yarla-studios-logo.svg"
+              width={112}
+            />
           </Link>
 
           <nav
