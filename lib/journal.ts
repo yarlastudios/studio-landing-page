@@ -32,7 +32,7 @@ const AUTHOR_ESWAR = {
 const AUTHOR_TEAM = {
   name: "Yarla Studios",
   role: "Design & Engineering Studio",
-  bio: "Notes, field reports, and thinking from the Yarla Studios team — a 14-person independent studio building considered digital experiences.",
+  bio: "Notes, field reports, and thinking from the Yarla Studios team — a 3-person, AI-powered independent studio building considered digital experiences.",
   initials: "YS",
 };
 

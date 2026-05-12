@@ -20,14 +20,14 @@ export function Stats() {
           Engagements shipped
         </div>
       </div>
-      <div className={TILE} data-count="14">
+      <div className={TILE} data-count="3">
         <div className="text-[clamp(64px,8vw,128px)] font-semibold leading-none tracking-[-0.04em] [font-family:var(--f-display)]">
-          <span className="counter" data-to="14">
+          <span className="counter" data-to="3">
             0
           </span>
         </div>
         <div className="mt-4 text-[13px] font-medium uppercase leading-none tracking-[0.04em] text-white/70 [font-family:var(--f-mono)]">
-          People in the studio
+          People + AI in the studio
         </div>
       </div>
       <div className={TILE} data-count="98">
